@@ -36,8 +36,8 @@ Full example
 		secondcolor=color2,
 	]{TelecomNancy}
 
-	\definecolor{color1}{RGB}{108, 36, 102}%
-	\definecolor{color2}{RGB}{239, 138, 38}%
+	\definecolor{color1}{RGB}{100, 100, 100}%
+	\definecolor{color2}{RGB}{220, 0, 0}%
 ```
 
 ## Theme options
