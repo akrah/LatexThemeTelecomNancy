@@ -51,3 +51,6 @@ Option					| Default value | Description
 **logo**				|				| Logo in bottom left of slides
 **firstcolor**			|	gray		| Primary color
 **secondcolor**			|	red			| Secondary color
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/akrah/beamerthemetelecomnancy/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
