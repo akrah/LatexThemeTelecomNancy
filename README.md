@@ -138,3 +138,7 @@ Option			| Default value | Description
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/akrah/beamerthemetelecomnancy/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/akrah/latexthemetelecomnancy/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
