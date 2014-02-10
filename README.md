@@ -3,7 +3,7 @@ Latex Themes for Telecom Nancy
 
 Personnal beamer and exercice theme used at Telecom Nancy.
 
-# Beamer theme
+# 1) Beamer theme
 
 ## How to include the Beamer theme of Telecom Nancy in my project ?
 
@@ -17,7 +17,6 @@ Two solutions :
 
 ```latex
 	\documentclass{beamer}
-
 	\usetheme{TelecomNancy}
 ```
 
@@ -55,7 +54,7 @@ Option					| Default value | Description
 
 
 
-# Exercise class
+# 2) Exercise class
 
 ## How to include the exercice class of Telecom Nancy in my project ?
 
@@ -64,6 +63,14 @@ Two solutions :
   2. copy the *TelecomNancy.cls* on your latex packages folder (~/.texmf-var/tex/latex/)
 
 ## How to use the exercice class of Telecom Nancy in my latex files ?
+
+The TelecomNancy class provides `\globalinstructions` and `\exercise` commands.
+
+`\globalinstructions[title]{instructions...}`: the title is optionnal, it is ``Global instructions'' by default.
+
+`\exercise{instructions}{questions}`: the instructions part can be empty. In the question part, use `\question` command (see Full example).
+
+Warning: if questions appear before instructions, use `\clearpage` command before the concerned `\exercise` command.
 
 ### Minimal example
 
@@ -106,7 +113,10 @@ Two solutions :
 		\studentlevel{1st year}
 		\doctitle{Exercices of the first course}
 		
-		\globalinstruction{The global instructions}
+		\globalinstructions[Optionnal title, ``Global Instructions'' by default]
+		{
+			The global instructions.
+		}
 
 		\exercise{
 			You can write here instructions of the first exercise.
@@ -115,10 +125,8 @@ Two solutions :
 			\question Second question of the first exercise.
 		}
 
-		\exercise{
-			Instructions of the second exercise.
-		}{
-			\question First question of the second exercise.
+		\exercise{}{
+			\question First question of the second exercise, whitout instructions.
 		}
 
 	\end{document}

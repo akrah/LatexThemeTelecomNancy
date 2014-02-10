@@ -193,12 +193,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Commands
 
-\newcommand{\globalinstruction}[1]{%
+\newcommand{\globalinstructions}[2][Global instructions]{%
 	~\vspace{-2em}%
 	{\color{\secondcolor}\hrule depth .3mm \vspace{1em}}%
-	{\color{\secondcolor} \large \bfseries \itshape Consignes globales}\\%
+	{\color{\secondcolor} \large \bfseries \itshape #1}\\%
 		\vspace{-.5em}\\%
-		{\indent \textit{#1}}%
+		{\indent \textit{#2}}%
 	{\vspace{1em}\color{\secondcolor}\hrule depth .3mm}%
 	\vspace{2em}%
 }
@@ -207,23 +207,31 @@
 \setcounter{ExoCount}{1}
 
 \newcommand{\exercise}[2]{%
-	\begin{table}[ht]%
+	\def\@instr{#1}%
+	\begin{table}[!ht]%
 		\arrayrulecolor{\secondcolor}%
 		\setlength{\arrayrulewidth}{1.5mm}%
 		\noindent\begin{tabular}{|l}%
 			\begin{minipage}[l]{.97\columnwidth}%
-				\textbf{\large Exercice \theExoCount}\\
-				\vspace{-.8em}\\%
-				#1
+				\textbf{\large Exercice \theExoCount}%
+				\ifx\@instr\@empty%
+				\else%
+					\\
+					\vspace{-.7em}\\
+					#1
+				\fi%
 			\end{minipage}%
 		\end{tabular}%
-		\vspace{-1em}
+		\ifx\@instr\@empty%
+			\vspace{-1em}%
+		\else%
+		\fi%
+		\vspace{-.5em}%
 	\end{table}%
 	\begin{enumerate}[leftmargin=*,label=(\theExoCount.\theQuestCount),font=\itshape]%
 		#2
 	\end{enumerate}%
-	\vspace{1em}%
-	\stepcounter{ExoCount}
+	\stepcounter{ExoCount}%
 }
 
 \newcounter{QuestCount}[ExoCount]
