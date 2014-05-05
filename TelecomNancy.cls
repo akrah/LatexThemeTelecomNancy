@@ -28,7 +28,7 @@
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Class templateTelecomNancy for exercices.
+% Class TelecomNancy for exercices.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -155,7 +155,7 @@
 	\ifx\logo\@empty%
 	\else%
 		\vbox{
-			\hspace{.25\footskip}
+			\hspace{.6\footskip}
 			\includegraphics[height=.7\footskip]{\logo}
 			\vspace{.15\footskip}
 		}
@@ -166,7 +166,7 @@
 	\ifx\footband\@empty%
 	\else%
 		\vbox{
-			\includegraphics[width=.83\headwidth,height=\footskip]{\footband}
+			\includegraphics[width=.8\headwidth,height=\footskip]{\footband}
 		}
 	\fi
 }
@@ -200,46 +200,57 @@
 		\vspace{-.5em}\\%
 		{\indent \textit{#2}}%
 	{\vspace{1em}\color{\secondcolor}\hrule depth .3mm}%
-	\vspace{2em}%
 }
 
 \newcounter{ExoCount}
-\setcounter{ExoCount}{1}
+\setcounter{ExoCount}{0}
 
-\newcommand{\exercise}[2]{%
+\newcommand{\nextExercise}[2][]{%
+	\stepcounter{ExoCount}%
+	\def\@extitle{#1}%
+	\def\@instr{#2}%
+	\vspace{1em}
+	\begin{table}[!ht]%
+		\arrayrulecolor{\secondcolor}%
+		\setlength{\arrayrulewidth}{1.5mm}%
+		\noindent\begin{tabular}{|l}%
+			\begin{minipage}[l]{.96\columnwidth}%
+				\textbf{\large Exercice \theExoCount{ }\ifx\@extitle\@empty\else: #1\fi}%
+				\ifx\@instr\@empty%
+				\else%
+					\\
+					\vspace{-.7em}\\
+					#2
+				\fi%
+			\end{minipage}%
+		\end{tabular}%
+		\vspace{-1em}%
+	\end{table}%
+}
+
+\newcommand{\nextInstructions}[1]{%
 	\def\@instr{#1}%
 	\begin{table}[!ht]%
 		\arrayrulecolor{\secondcolor}%
 		\setlength{\arrayrulewidth}{1.5mm}%
 		\noindent\begin{tabular}{|l}%
-			\begin{minipage}[l]{.97\columnwidth}%
-				\textbf{\large Exercice \theExoCount}%
-				\ifx\@instr\@empty%
-				\else%
-					\\
-					\vspace{-.7em}\\
-					#1
-				\fi%
+			\begin{minipage}[l]{.96\columnwidth}%
+				#1
 			\end{minipage}%
 		\end{tabular}%
-		\ifx\@instr\@empty%
-			\vspace{-1em}%
-		\else%
-		\fi%
-		\vspace{-.5em}%
+		\vspace{-1em}%
 	\end{table}%
-	\begin{enumerate}[leftmargin=*,label=(\theExoCount.\theQuestCount),font=\itshape]%
-		#2
-	\end{enumerate}%
-	\stepcounter{ExoCount}%
 }
 
 \newcounter{QuestCount}[ExoCount]
 \setcounter{QuestCount}{0}
 
-\newcommand{\question}{%
+\newcommand{\nextQuestion}[1]{%
 	\stepcounter{QuestCount}
-	\item
+	\begin{enumerate}[leftmargin=*,label=(\theExoCount.\theQuestCount),font=\itshape]%
+		\item #1
+		\vspace{-1em}
+	\end{enumerate}%
 }
 
 \renewcommand{\emph}[1]{\textbf{\color{\secondcolor}#1}}
