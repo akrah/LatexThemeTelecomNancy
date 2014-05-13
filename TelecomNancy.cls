@@ -107,6 +107,14 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lists
+
+\setitemize{itemsep=-.15cm,label=$\bullet$}
+\setenumerate{itemsep=0cm,topsep=0cm,itemindent=.5cm}
+\setdescription{itemsep=-.12cm,itemindent=.1cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Header
@@ -224,7 +232,6 @@
 				\fi%
 			\end{minipage}%
 		\end{tabular}%
-		\vspace{-1em}%
 	\end{table}%
 }
 
@@ -238,7 +245,6 @@
 				#1
 			\end{minipage}%
 		\end{tabular}%
-		\vspace{-1em}%
 	\end{table}%
 }
 
@@ -249,7 +255,6 @@
 	\stepcounter{QuestCount}
 	\begin{enumerate}[leftmargin=*,label=(\theExoCount.\theQuestCount),font=\itshape]%
 		\item #1
-		\vspace{-1em}
 	\end{enumerate}%
 }
 
