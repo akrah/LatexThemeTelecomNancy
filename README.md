@@ -104,7 +104,8 @@ Warning: if questions appear before instructions, use `\clearpage` command befor
 ### Full example
 
 ```latex
-	\documentclass[margin=1.5cm,
+	\documentclass[headheight=4.5cm,
+				   margin=2cm,
 				   titlewidth=0.6,
 				   sansserif,
 				   firstcolor=color1,
@@ -152,8 +153,9 @@ Warning: if questions appear before instructions, use `\clearpage` command befor
 
 Option			| Default value | Description
 ---------------:|:-------------:|:-------------------------------------------------------------------
-**margin**		|	1.5cm		| Left and right margins
-**titlewidth**	|	0.6			| Percentage of the title width
+**headheight**	|	4.5cm		| Height of headings. May be adapted according to **margin**.
+**margin**		|	2cm			| Left and right margins
+**titlewidth**	|	0.6			| Percentage of the title box width
 **sansserif**	|				| Add this option to use sans serif text.
 **firstcolor**	|	gray		| Primary color
 **secondcolor**	|	red			| Secondary color

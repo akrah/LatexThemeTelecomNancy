@@ -61,12 +61,12 @@
 
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{article}}
 
-\setlength{\headheight}{4cm}
-\DeclareOptionX{headheight}[4cm]{\setlength{\headheight}{#1}}
+\setlength{\headheight}{4.5cm}
+\DeclareOptionX{headheight}[4.5cm]{\setlength{\headheight}{#1}}
 
 \newlength{\pmargin}
-\setlength{\pmargin}{1.5cm}
-\DeclareOptionX{margin}[1.5cm]{\setlength{\pmargin}{#1}}
+\setlength{\pmargin}{2cm}
+\DeclareOptionX{margin}[2cm]{\setlength{\pmargin}{#1}}
 
 \newlength{\titlewidth}
 \setlength{\titlewidth}{.6\paperwidth}
@@ -92,6 +92,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Length
+
+\newlength{\headleftwidth}
+\setlength{\headleftwidth}{\paperwidth}
+\addtolength{\headleftwidth}{-\titlewidth}
+\addtolength{\headleftwidth}{-.5cm}
 
 \setlength{\footskip}{1.5cm}
 \geometry{margin=\pmargin,top=\headheight,bottom=\footskip}
@@ -121,14 +126,10 @@
 
 \renewcommand{\headrulewidth}{0mm}
 \fancyhead[L]{
-	\hspace{-\pmargin}
-	\hspace{.8cm}
-	\begin{minipage}{\headwidth}%
-		\vspace{-2\headheight}%
-		\vspace{6cm}%
+	\hspace{-.5cm}
+	\begin{minipage}{\headleftwidth}%
 		\begin{bclogo}[couleur=white,barre=none,logo=,marge=6,noborder=true]{}%
 			\color{\secondcolor}
-				%\sffamily%
 				\textbf{\large \thestudentlevel}\\
 				\textbf{\large \thecoursename}\\
 				Page \thepage/\pageref{LastPage}
@@ -139,11 +140,8 @@
 }
 \fancyhead[R]{
 	\begin{minipage}{\titlewidth}%
-		\vspace{-2\headheight}%
-		\vspace{6cm}%
 		\begin{bclogo}[couleur=\firstcolor,arrondi=.4,ombre=true,couleurOmbre=black!40,epOmbre=.2,barre=none,logo=,marge=10,noborder=true]{}%
 			\vspace{-.55cm}
-			%\centering \sffamily \color{white}{\textbf{\Large \thedoctitle}}%
 			\centering \color{white}{\textbf{\Large \thedoctitle}}%
 		\end{bclogo}%
 	\end{minipage}%
@@ -162,20 +160,41 @@
 \fancyfoot[L]{
 	\ifx\logo\@empty%
 	\else%
-		\vbox{
-			\hspace{.6\footskip}
-			\includegraphics[height=.7\footskip]{\logo}
-			\vspace{.15\footskip}
-		}
+		\ifx\footband\@empty%
+		\else%
+			\vbox{
+				\hspace{1cm}
+				\includegraphics[height=.7\footskip]{\logo}
+				\vspace{.4cm}
+			}
+		\fi
 	\fi
 }
-\fancyfoot[C]{}
+\fancyfoot[C]{
+	\ifx\logo\@empty%
+		\ifx\footband\@empty%
+		\else%
+			\includegraphics[width=\headwidth,height=\footskip]{\footband}
+		\fi
+	\else%
+		\ifx\footband\@empty%
+			\vbox{
+				\includegraphics[height=.85\footskip]{\logo}
+				\vspace{.15\footskip}
+			}
+		\else%
+		\fi
+	\fi
+}
 \fancyfoot[R]{
 	\ifx\footband\@empty%
 	\else%
-		\vbox{
-			\includegraphics[width=.8\headwidth,height=\footskip]{\footband}
-		}
+		\ifx\logo\@empty%
+		\else%
+			\vbox{
+				\includegraphics[width=.78\headwidth,height=\footskip]{\footband}
+			}
+		\fi
 	\fi
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -253,7 +272,7 @@
 
 \newcommand{\nextQuestion}[1]{%
 	\stepcounter{QuestCount}
-	\begin{enumerate}[leftmargin=*,label=(\theExoCount.\theQuestCount),font=\itshape]%
+	\begin{enumerate}[leftmargin=*,label=(\theExoCount.\theQuestCount)]%
 		\item #1
 	\end{enumerate}%
 }
