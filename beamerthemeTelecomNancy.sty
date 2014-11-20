@@ -49,6 +49,11 @@
 \def\tocnbsections{}
 \DeclareOptionBeamer{tocnbsections}{\def\tocnbsections{#1}}%
 
+% Affichage du plan à chaque section
+\newboolean{@nosectiontoc}%
+\setboolean{@nosectiontoc}{false}%
+\DeclareOptionBeamer{nosectiontoc}{\setboolean{@nosectiontoc}{true}}%
+
 % Ajouter de l'espace entre les sections du sommaire
 \newboolean{@addsecspace}%
 \setboolean{@addsecspace}{false}%
@@ -243,12 +248,15 @@
 \newcommand{\tocfullcontent}{\toccontent{}}
 \newcommand{\tocsectioncontent}{\toccontent{currentsection}}
 
-\AtBeginSection[]
-{
-	\begin{frame}[plain]
-		\tocsectioncontent
-	\end{frame}
-}
+\ifthenelse{\boolean{@nosectiontoc}}{%
+}{%
+	\AtBeginSection[]
+	{
+		\begin{frame}[plain]
+			\tocsectioncontent
+		\end{frame}
+	}
+}%
 % -------------------------------------------------------------------------
 
 
