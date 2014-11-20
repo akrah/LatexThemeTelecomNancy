@@ -83,9 +83,9 @@ Warning: if questions appear before instructions, use `\clearpage` command befor
 
 	\begin{document}
 
-		\coursename{Name of the course}
-		\studentlevel{1st year}
-		\doctitle{Title of the page}
+		\coursetitle{Title of course}
+		\courselevel{Course level}
+		\courseyear{Year}
 
 		\nextExercise{}
 
@@ -110,18 +110,19 @@ Warning: if questions appear before instructions, use `\clearpage` command befor
 				   sansserif,
 				   firstcolor=color1,
 				   secondcolor=color2,
-				   logo=myLogo.png,
-				   footband=myFootBand.png]{TelecomNancy}
+				   % logo=myLogo.png,
+				   % footband=myFootBand.png
+				  ]{TelecomNancy}
 
 	\definecolor{color1}{RGB}{100, 100, 100}
 	\definecolor{color2}{RGB}{220, 0, 0}
 
 	\begin{document}
 
-		\coursename{Name of the course}
-		\studentlevel{1st year}
-		\doctitle{Title of the page}
-		
+		\coursetitle{Title of course}
+		\courselevel{Course level}
+		\courseyear{Year}
+			
 		\globalinstructions[Optionnal title, ``Global Instructions'' by default]
 		{
 			The global instructions.
@@ -154,13 +155,13 @@ Warning: if questions appear before instructions, use `\clearpage` command befor
 Option			| Default value | Description
 ---------------:|:-------------:|:-------------------------------------------------------------------
 **headheight**	|	4.5cm		| Height of headings. May be adapted according to **margin**.
-**margin**		|	2cm			| Left and right margins
-**titlewidth**	|	0.6			| Percentage of the title box width
+**margin**		|	2cm			| Left and right margins.
+**titlewidth**	|	0.6			| Percentage of the title box width.
 **sansserif**	|				| Add this option to use sans serif text.
-**firstcolor**	|	gray		| Primary color
-**secondcolor**	|	red			| Secondary color
-**logo**		|				| Logo in bottom left of page
-**footband**	|				| Foot band image in right of the logo
+**firstcolor**	|	gray		| Primary color.
+**secondcolor**	|	red			| Secondary color.
+**logo**		|				| Logo in bottom left of page.
+**footband**	|				| Foot band image in right of the logo.
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/akrah/latexthemetelecomnancy/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

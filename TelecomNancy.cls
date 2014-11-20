@@ -130,8 +130,8 @@
 	\begin{minipage}{\headleftwidth}%
 		\begin{bclogo}[couleur=white,barre=none,logo=,marge=6,noborder=true]{}%
 			\color{\secondcolor}
-				\textbf{\large \thestudentlevel}\\
-				\textbf{\large \thecoursename}\\
+				\textbf{\large \thecourselevel}\\
+				\textbf{\large \thecourseyear}\\
 				Page \thepage/\pageref{LastPage}
 		\end{bclogo}%
 	\end{minipage}
@@ -141,8 +141,8 @@
 \fancyhead[R]{
 	\begin{minipage}{\titlewidth}%
 		\begin{bclogo}[couleur=\firstcolor,arrondi=.4,ombre=true,couleurOmbre=black!40,epOmbre=.2,barre=none,logo=,marge=10,noborder=true]{}%
-			\vspace{-.55cm}
-			\centering \color{white}{\textbf{\Large \thedoctitle}}%
+			\vspace{-.55cm}%
+			\centering \color{white}{\textbf{\Large \thecoursetitle}}%
 		\end{bclogo}%
 	\end{minipage}%
 	\hspace{-\pmargin}
@@ -204,17 +204,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Text variables
 
-\def\@doctitle{Template example}
-\newcommand{\doctitle}[1]{\def\@doctitle{#1}}
-\newcommand{\thedoctitle}{\@doctitle}
+\def\@coursetitle{Template example}
+\newcommand{\coursetitle}[1]{\def\@coursetitle{#1}}
+\newcommand{\thecoursetitle}{\@coursetitle}
 
-\def\@studentlevel{1A}
-\newcommand{\studentlevel}[1]{\def\@studentlevel{#1}}
-\newcommand{\thestudentlevel}[1]{\@studentlevel}
+\def\@courselevel{1A}
+\newcommand{\courselevel}[1]{\def\@courselevel{#1}}
+\newcommand{\thecourselevel}[1]{\@courselevel}
 
-\def\@coursename{Course name}
-\newcommand{\coursename}[1]{\def\@coursename{#1}}
-\newcommand{\thecoursename}[1]{\@coursename}
+\def\@courseyear{Course name}
+\newcommand{\courseyear}[1]{\def\@courseyear{#1}}
+\newcommand{\thecourseyear}[1]{\@courseyear}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -223,9 +223,8 @@
 \newcommand{\globalinstructions}[2][Global instructions]{%
 	~\vspace{-2em}%
 	{\color{\secondcolor}\hrule depth .3mm \vspace{1em}}%
-	{\color{\secondcolor} \large \bfseries \itshape #1}\\%
-		\vspace{-.5em}\\%
-		{\indent \textit{#2}}%
+	{\color{\secondcolor} \large \bfseries \itshape \noindent #1}\\%
+		\textit{#2}%
 	{\vspace{1em}\color{\secondcolor}\hrule depth .3mm}%
 }
 
@@ -272,7 +271,7 @@
 
 \newcommand{\nextQuestion}[1]{%
 	\stepcounter{QuestCount}
-	\begin{enumerate}[leftmargin=*,label=(\theExoCount.\theQuestCount)]%
+	\begin{enumerate}[leftmargin=*,itemindent=*,labelsep=.4em,label=(\theExoCount.\theQuestCount)]%
 		\item #1
 	\end{enumerate}%
 }
