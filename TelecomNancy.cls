@@ -276,6 +276,12 @@
 	\end{enumerate}%
 }
 
+\newcommand{\answer}[1]{%
+	\begin{center}
+		\textit{\color{red}#1}
+	\end{center}
+}
+
 \renewcommand{\emph}[1]{\textbf{\color{\secondcolor}#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
