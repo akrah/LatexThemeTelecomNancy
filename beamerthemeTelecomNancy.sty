@@ -59,6 +59,11 @@
 \setboolean{@addsecspace}{false}%
 \DeclareOptionBeamer{addsecspace}{\setboolean{@addsecspace}{true}}%
 
+% Ajouter de l'espace entre les sections du sommaire
+\newboolean{@onlysecinheadline}%
+\setboolean{@onlysecinheadline}{false}%
+\DeclareOptionBeamer{onlysecinheadline}{\setboolean{@onlysecinheadline}{true}}%
+
 % Image du logo
 \def\logo{}%
 \DeclareOptionBeamer{logo}{\def\logo{#1}}%
@@ -147,7 +152,11 @@
 	{%
 		\vspace{-1.1em}%
 		\begin{beamercolorbox}[wd=\slidewidth,ht=1.1em,dp=0em,center,shadow=true,rounded=true]{section in head/foot}%
-			\insertsubsectionnavigationhorizontal{1.05\contentwidth}{\insertsectionnumber. \insertsectionhead \hfill}{\hfill}%
+			\ifthenelse{\boolean{@onlysecinheadline}}{%
+				\insertsectionnavigationhorizontal{1.05\contentwidth}{\hfill\bfseries}{\hfill}%
+			}{%
+				\insertsubsectionnavigationhorizontal{1.05\contentwidth}{\insertsectionnumber. \insertsectionhead \hfill}{\hfill}%
+			}%
 		\end{beamercolorbox}%
 	}%
 }%
