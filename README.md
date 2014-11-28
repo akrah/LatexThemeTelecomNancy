@@ -43,9 +43,10 @@ Two solutions :
 
 Option					| Default value | Description
 -----------------------:|:-------------:|:-------------------------------------------------------------------
-**toccolumns**			|				| Summary page in two columns
-**tocnbsections**		|	2			| Number of sections in the first summary column
-**addsecspace**			|				| Add space between section names and section content in summary page
+**toccolumns**			|				| Toc pages in two columns
+**tocnbsections**		|	2			| Number of sections in the first toc column
+**addsecspace**			|				| Add space between section names and section content in toc page
+**onlysecinheadline**	|				| Show only sections in headline (no subsections)
 **backgroundtitlepage**	|				| Background image of the first page
 **logo**				|				| Logo in bottom left of slides
 **firstcolor**			|	gray		| Primary color
