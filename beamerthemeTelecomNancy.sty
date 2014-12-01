@@ -41,9 +41,9 @@
 % Options
 
 % Affichage du plan sur deux colonnes
-\newboolean{usetoccolumns}%
-\setboolean{usetoccolumns}{false}%
-\DeclareOptionBeamer{toccolumns}{\setboolean{usetoccolumns}{true}}%
+\newboolean{@usetoccolumns}%
+\setboolean{@usetoccolumns}{false}%
+\DeclareOptionBeamer{usetoccolumns}{\setboolean{@usetoccolumns}{true}}%
 
 % Nombre de sections dans la première colonne
 \def\tocnbsections{}
@@ -125,7 +125,8 @@
 \setbeamercolor{author in head/foot}{parent=palette quaternary}%
 \setbeamercolor{date in head/foot}{parent=palette secondary}%
 
-\setbeamercolor{title}{parent=palette secondary}%
+\setbeamercolor{title}{fg=white,bg=black}%
+\setbeamercolor{author}{parent=palette secondary}%
 \setbeamercolor{frametitle}{parent=palette primary}%
 \setbeamercolor{frametitle in toc}{parent=palette quaternary}%
 \setbeamercolor{section in toc}{parent=palette primary}%
@@ -144,7 +145,27 @@
 % Template des slides
 
 \setbeamertemplate{navigation symbols}{}%
-\setbeamertemplate{title page}[default][sep=0.5em,rounded=true,shadow=true]%
+\setbeamertemplate{title page}%
+{%
+\vspace{5em}%
+	\transparent{.6}%
+	\begin{beamercolorbox}[sep=.7em,dp=0em,colsep=0em,colsep*=0em,center,rounded=false]{title}%
+		\transparent{1}%
+		\bfseries%
+		\usebeamerfont{title}\inserttitle \\[.2em]%
+		\usebeamerfont{subtitle}\insertsubtitle%
+	\end{beamercolorbox}%
+\vspace{6em}%
+	\transparent{1}
+	\hspace{.61\textwidth}
+	\begin{beamercolorbox}[sep=.5em,center,rounded=true,wd=.37\textwidth,ignorebg]{author}%
+		\bfseries
+		\usebeamerfont{author}\insertauthor \\[1em]%
+		\usebeamerfont{institute}\insertinstitute \\[1em]%
+		\usebeamerfont{date}\insertdate%
+	\end{beamercolorbox}%
+}
+
 \setbeamertemplate{headline}%
 {%
 	\hspace{\slidemargin}%
@@ -230,7 +251,7 @@
 	}%
 }
 
-\ifthenelse{\boolean{usetoccolumns}}{%
+\ifthenelse{\boolean{@usetoccolumns}}{%
 	% Counter
 	\newcounter{tocsecondcolumnstart}%
 	\setcounter{tocsecondcolumnstart}{\tocnbsections}%
