@@ -76,6 +76,11 @@
 \def\backgroundtitlepage{}%
 \DeclareOptionBeamer{backgroundtitlepage}{\def\backgroundtitlepage{#1}}%
 
+% Cacher la barre d'entete
+\newboolean{@hideheadline}%
+\setboolean{@hideheadline}{false}%
+\DeclareOptionBeamer{hideheadline}{\setboolean{@hideheadline}{true}}%
+
 % Couleur principale
 \def\firstcolor{gray}%
 \DeclareOptionBeamer{firstcolor}{\def\firstcolor{#1}}%
@@ -115,10 +120,10 @@
 % -------------------------------------------------------------------------
 % Couleurs
 
-\setbeamercolor{palette primary}{use={structure,normal text},fg=\secondcolor,bg=}
-\setbeamercolor{palette secondary}{use={structure,normal text},fg=white,bg=\firstcolor}%
-\setbeamercolor{palette tertiary}{use={structure,normal text},fg=white,bg=\secondcolor}%
-\setbeamercolor{palette quaternary}{use={structure,normal text},fg=\firstcolor,bg=}%
+\setbeamercolor{palette primary}{fg=\secondcolor,bg=}
+\setbeamercolor{palette secondary}{fg=white,bg=\firstcolor}%
+\setbeamercolor{palette tertiary}{fg=white,bg=\secondcolor}%
+\setbeamercolor{palette quaternary}{fg=\firstcolor,bg=}%
 
 \setbeamercolor{section in head/foot}{parent=palette secondary}%
 \setbeamercolor{title in head/foot}{parent=palette primary}%
@@ -134,7 +139,7 @@
 \setbeamercolor{block title example}{parent=palette tertiary}%
 \setbeamercolor{block title alerted}{parent=palette secondary}%
 \setbeamercolor{block body alerted}{parent=palette secondary}%
-\setbeamercolor{alerted text}{fg=\secondcolor}%
+\setbeamercolor{alerted text}{parent=palette primary}%
 \setbeamercolor{item}{fg=gray}%
 
 % -------------------------------------------------------------------------
@@ -168,17 +173,20 @@
 
 \setbeamertemplate{headline}%
 {%
-	\hspace{\slidemargin}%
-	\vbox%
+	\ifthenelse{\boolean{@hideheadline}}{}%
 	{%
-		\vspace{-1.1em}%
-		\begin{beamercolorbox}[wd=\slidewidth,ht=1.1em,dp=0em,center,shadow=true,rounded=true]{section in head/foot}%
-			\ifthenelse{\boolean{@onlysecinheadline}}{%
-				\insertsectionnavigationhorizontal{1.05\contentwidth}{\hfill\bfseries}{\hfill}%
-			}{%
-				\insertsubsectionnavigationhorizontal{1.05\contentwidth}{\insertsectionnumber. \insertsectionhead \hfill}{\hfill}%
-			}%
-		\end{beamercolorbox}%
+		\hspace{\slidemargin}%
+		\vbox%
+		{%
+			\vspace{-1.1em}%
+			\begin{beamercolorbox}[wd=\slidewidth,ht=1.1em,dp=0em,center,shadow=true,rounded=true]{section in head/foot}%
+				\ifthenelse{\boolean{@onlysecinheadline}}{%
+					\insertsectionnavigationhorizontal{1.05\contentwidth}{\hfill\bfseries}{\hfill}%
+				}{%
+					\insertsubsectionnavigationhorizontal{1.05\contentwidth}{\insertsectionnumber. \insertsectionhead \hfill}{\hfill}%
+				}%
+			\end{beamercolorbox}%
+		}%
 	}%
 }%
 \setbeamertemplate{frametitle}%
@@ -192,14 +200,14 @@
 	\hbox%
 	{%
 		\hspace{2\slidemargin}%
-		\begin{beamercolorbox}[wd=0.85\slidewidth,ht=1.1em,dp=0.4em,center]{author in head/foot}%
+		\begin{beamercolorbox}[wd=0.9\slidewidth,ht=1.1em,dp=0.4em,center]{author in head/foot}%
 			\insertshorttitle \quad -- \quad \textit{\insertshortauthor}%
 		\end{beamercolorbox}%
 		\vbox{%
-			\begin{beamercolorbox}[wd=1cm,ht=1.1em,colsep=0.5em,center,rounded=true]{date in head/foot}%
-				\insertframenumber{} / \inserttotalframenumber%
+			\begin{beamercolorbox}[wd=.05\textwidth,ht=1em,colsep=0.4em,center,rounded=true,shadow=true]{date in head/foot}%
+				\insertframenumber{}/\inserttotalframenumber%
 			\end{beamercolorbox}%
-			\vspace{-1.1em}%
+			\vspace{-1.3em}%
 		}%
 	}%
 }%
@@ -260,10 +268,10 @@
 	\newcommand{\toccontent}[1]{%
 		\frametitleintoc%
 		\begin{columns}[t]%
-			\begin{column}{0.45\textwidth}%
+			\begin{column}{0.4\textwidth}%
 				\tableofcontents[sections={1-\tocnbsections},#1]%
 			\end{column}%
-			\begin{column}{0.45\textwidth}%
+			\begin{column}{0.4\textwidth}%
 				\tableofcontents[sections={\thetocsecondcolumnstart-},#1]%
 			\end{column}%
 		\end{columns}%
@@ -278,8 +286,8 @@
 \newcommand{\tocfullcontent}{\toccontent{}}
 \newcommand{\tocsectioncontent}{\toccontent{currentsection}}
 
-\ifthenelse{\boolean{@nosectiontoc}}{%
-}{%
+\ifthenelse{\boolean{@nosectiontoc}}{}%
+{%
 	\AtBeginSection[]
 	{
 		\begin{frame}[plain]
