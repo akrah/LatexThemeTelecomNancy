@@ -104,15 +104,15 @@
 \newlength{\textmargin}%
 \setlength{\textmargin}{2.\slidemargin}%
 
-\setbeamersize{text margin left=\textmargin}%
-\setbeamersize{text margin right=\textmargin}%
-
 \newlength{\contentwidth}%
 \setlength{\contentwidth}{\textwidth}%
 
 \newlength{\slidewidth}%
 \setlength{\slidewidth}{\textwidth}%
 \addtolength{\slidewidth}{\textmargin}%
+
+\setbeamersize{text margin left=\textmargin}%
+\setbeamersize{text margin right=\textmargin}%
 % -------------------------------------------------------------------------
 
 
@@ -140,7 +140,7 @@
 \setbeamercolor{block title alerted}{parent=palette secondary}%
 \setbeamercolor{block body alerted}{parent=palette secondary}%
 \setbeamercolor{alerted text}{parent=palette primary}%
-\setbeamercolor{item}{fg=gray}%
+\setbeamercolor{item}{fg=\firstcolor!60}%
 
 % -------------------------------------------------------------------------
 
@@ -188,13 +188,15 @@
 			\end{beamercolorbox}%
 		}%
 	}%
-}%
+}
+
 \setbeamertemplate{frametitle}%
 {%
 	\begin{beamercolorbox}[wd=\slidewidth,ht=1.1em,dt=0em,ignorebg]{frametitle in head/foot}%
 		\insertframetitle%
 	\end{beamercolorbox}%
-}%
+}
+
 \setbeamertemplate{footline}%
 {%
 	\hbox%
