@@ -193,7 +193,7 @@
 \setbeamertemplate{frametitle}%
 {%
 	\begin{beamercolorbox}[wd=\slidewidth,ht=1.1em,dt=0em,ignorebg]{frametitle in head/foot}%
-		\insertframetitle%
+		\bfseries \insertframetitle%
 	\end{beamercolorbox}%
 }
 
@@ -254,9 +254,9 @@
 \newcommand{\frametitleintoc}
 {
 	\frametitle{%
-		\vspace{-0.25cm}%
+		\vspace{-1cm}%
 		\begin{beamercolorbox}[wd=0.9\slidewidth,left,rounded=true]{frametitle in toc}%
-			{\LARGE \bfseries Plan}%
+			\centering {\LARGE \bfseries Plan}%
 		\end{beamercolorbox}%
 	}%
 }
