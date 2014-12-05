@@ -120,27 +120,32 @@
 % -------------------------------------------------------------------------
 % Couleurs
 
-\setbeamercolor{palette primary}{fg=\secondcolor,bg=}
+\setbeamercolor{palette primary}{fg=\firstcolor,bg=}
 \setbeamercolor{palette secondary}{fg=white,bg=\firstcolor}%
-\setbeamercolor{palette tertiary}{fg=white,bg=\secondcolor}%
-\setbeamercolor{palette quaternary}{fg=\firstcolor,bg=}%
-
-\setbeamercolor{section in head/foot}{parent=palette secondary}%
-\setbeamercolor{title in head/foot}{parent=palette primary}%
-\setbeamercolor{author in head/foot}{parent=palette quaternary}%
-\setbeamercolor{date in head/foot}{parent=palette secondary}%
+\setbeamercolor{palette tertiary}{fg=\secondcolor,bg=}%
+\setbeamercolor{palette quaternary}{fg=white,bg=\secondcolor}%
 
 \setbeamercolor{title}{fg=white,bg=black}%
 \setbeamercolor{author}{parent=palette secondary}%
-\setbeamercolor{frametitle}{parent=palette primary}%
+
+\setbeamercolor{section in head/foot}{parent=palette secondary}%
+\setbeamercolor{author in head/foot}{parent=palette primary}%
+\setbeamercolor{date in head/foot}{parent=palette secondary}%
+
 \setbeamercolor{frametitle in toc}{parent=palette quaternary}%
-\setbeamercolor{section in toc}{parent=palette primary}%
+\setbeamercolor{section in toc}{parent=palette quaternary}%
+\setbeamercolor{section in toc shaded}{parent=palette primary}%
+\setbeamercolor{subsection in toc}{parent=palette quaternary}%
+\setbeamercolor{subsection in toc shaded}{parent=palette primary}%
+
+\setbeamercolor{frametitle}{parent=palette primary}%
 \setbeamercolor{block title}{parent=palette secondary}%
-\setbeamercolor{block title example}{parent=palette tertiary}%
+\setbeamercolor{block title example}{parent=palette secondary}%
 \setbeamercolor{block title alerted}{parent=palette secondary}%
 \setbeamercolor{block body alerted}{parent=palette secondary}%
 \setbeamercolor{alerted text}{parent=palette primary}%
-\setbeamercolor{item}{fg=\firstcolor!60}%
+
+\setbeamercolor{item}{parent=palette tertiary}%
 
 % -------------------------------------------------------------------------
 
@@ -192,7 +197,7 @@
 
 \setbeamertemplate{frametitle}%
 {%
-	\begin{beamercolorbox}[wd=\slidewidth,ht=1.1em,dt=0em,ignorebg]{frametitle in head/foot}%
+	\begin{beamercolorbox}[wd=\slidewidth,ht=1.1em,dt=0em,ignorebg]{frametitle}%
 		\bfseries \insertframetitle%
 	\end{beamercolorbox}%
 }
@@ -206,10 +211,10 @@
 			\insertshorttitle \quad -- \quad \textit{\insertshortauthor}%
 		\end{beamercolorbox}%
 		\vbox{%
-			\begin{beamercolorbox}[wd=.05\textwidth,ht=1em,colsep=0.4em,center,rounded=true,shadow=true]{date in head/foot}%
-				\insertframenumber{}/\inserttotalframenumber%
+			\begin{beamercolorbox}[wd=.05\textwidth,ht=1em,colsep=0em,center,rounded=true,shadow=true]{date in head/foot}%
+				\vspace{.2em}\insertframenumber{}/\inserttotalframenumber%
 			\end{beamercolorbox}%
-			\vspace{-1.3em}%
+			\vspace{-1em}%
 		}%
 	}%
 }%
@@ -245,23 +250,43 @@
 % -------------------------------------------------------------------------
 % Sommaire
 
-\ifthenelse{\boolean{@addsecspace}}{%
+\setbeamerfont{section in toc}{series=\bfseries,size=\Huge}
+\setbeamerfont{section in toc shaded}{series=\mdseries,size=\Large}
+\setbeamerfont{subsection in toc}{series=\bfseries,size=\normalfont}
+\setbeamerfont{subsection in toc shaded}{series=\mdseries}
+\ifthenelse{\boolean{@addsecspace}}
+{%
 	\setbeamertemplate{section in toc}{\vskip1em{{\inserttocsectionnumber.} \inserttocsection}}%
 }{%
-	\setbeamertemplate{section in toc}[sections numbered]%
+	\setbeamertemplate{section in toc}{%
+		\begin{beamercolorbox}[wd=\slidewidth,ht=1.1em,dp=0.4em,center]{palette quaternary}%
+			\inserttocsection%
+		\end{beamercolorbox}%
+	}%
+	\setbeamertemplate{section in toc shaded}{%
+		\begin{beamercolorbox}[wd=\slidewidth,ht=1em,dp=0.4em,center]{palette quaternary}%
+			\inserttocsection%
+		\end{beamercolorbox}%
+	}%
+	\setbeamertemplate{subsection in toc}{%
+		\begin{beamercolorbox}[wd=\slidewidth,ht=1em,dp=0em,center]{palette quaternary}%
+			\inserttocsubsection%
+		\end{beamercolorbox}%
+	}%
 }%
 
 \newcommand{\frametitleintoc}
 {
 	\frametitle{%
-		\vspace{-1cm}%
-		\begin{beamercolorbox}[wd=0.9\slidewidth,left,rounded=true]{frametitle in toc}%
+		\vspace{-2em}%
+		\begin{beamercolorbox}[wd=\slidewidth,center,rounded=true]{frametitle in toc}%
 			\centering {\LARGE \bfseries Plan}%
 		\end{beamercolorbox}%
 	}%
 }
 
-\ifthenelse{\boolean{@usetoccolumns}}{%
+\ifthenelse{\boolean{@usetoccolumns}}
+{%
 	% Counter
 	\newcounter{tocsecondcolumnstart}%
 	\setcounter{tocsecondcolumnstart}{\tocnbsections}%
@@ -280,8 +305,7 @@
 	}%
 }{%
 	\newcommand{\toccontent}[1]{%
-		\frametitleintoc
-		\tableofcontents[#1]%
+		\tableofcontents[#1,hidesubsections]%
 	}%
 }%
 
@@ -291,12 +315,29 @@
 \ifthenelse{\boolean{@nosectiontoc}}{}%
 {%
 	\AtBeginSection[]
-	{
-		\begin{frame}[plain]
-			\tocsectioncontent
-		\end{frame}
-	}
+	{%
+		{%
+			\setbeamertemplate{background canvas}[default]%
+			\setbeamercolor{background canvas}{parent=palette quaternary}%
+			\begin{frame}[plain]%
+				\tocsectioncontent%
+			\end{frame}%
+		}%
+	}%
 }%
+
+\newcommand{\sectionslide}[1]%
+{%
+	{%
+		\setbeamertemplate{background canvas}[default]%
+		\setbeamercolor{background canvas}{parent=palette quaternary}%
+		\begin{frame}[plain]%
+			\begin{center}%
+				\bfseries \Huge \color{white} #1
+			\end{center}%
+		\end{frame}%
+	}%
+}
 % -------------------------------------------------------------------------
 
 
@@ -308,8 +349,8 @@
 	\ifnum\c@framenumber=1%
 		\ifx\backgroundtitlepage\@empty%
 		\else%
-    		\includegraphics[width=\paperwidth,height=\paperheight]{\backgroundtitlepage}%
-    	\fi%
+			\includegraphics[width=\paperwidth,height=\paperheight]{\backgroundtitlepage}%
+		\fi%
 	\else%
 		\ifx\logo\@empty%
 		\else%
@@ -319,7 +360,7 @@
 				\begin{picture}(0,0)\put(5,-270){\includegraphics[height=\logoheight]{\logo}}\end{picture}
 			\fi%
 		\fi%
-   \fi%
+	\fi%
 }
 % -------------------------------------------------------------------------
 
