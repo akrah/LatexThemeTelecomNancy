@@ -208,7 +208,7 @@
 	{%
 		\hspace{2\slidemargin}%
 		\begin{beamercolorbox}[wd=0.9\slidewidth,ht=1.1em,dp=0.4em,center]{author in head/foot}%
-			\insertshorttitle \quad -- \quad \textit{\insertshortauthor}%
+			\textit{\insertshorttitle} % \quad -- \quad \textit{\insertshortauthor}%
 		\end{beamercolorbox}%
 		\vbox{%
 			\begin{beamercolorbox}[wd=.05\textwidth,ht=1em,colsep=0em,center,rounded=true,shadow=true]{date in head/foot}%
@@ -305,7 +305,7 @@
 	}%
 }{%
 	\newcommand{\toccontent}[1]{%
-		\tableofcontents[#1,hidesubsections]%
+		\tableofcontents[#1,hideallsubsections]%
 	}%
 }%
 
