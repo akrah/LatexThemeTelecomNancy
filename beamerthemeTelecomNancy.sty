@@ -72,9 +72,20 @@
 \def\logoheight{}%
 \DeclareOptionBeamer{logoheight}{\def\logoheight{#1}}%
 
+\def\logosec{}%
+\DeclareOptionBeamer{logosec}{\def\logosec{#1}}%
+
+% Taille du logosec
+\def\logosecheight{}%
+\DeclareOptionBeamer{logosecheight}{\def\logosecheight{#1}}%
+
 % Fond 1ere page
 \def\backgroundtitlepage{}%
 \DeclareOptionBeamer{backgroundtitlepage}{\def\backgroundtitlepage{#1}}%
+
+% Fond derniere page
+\def\backgroundlastpage{}%
+\DeclareOptionBeamer{backgroundlastpage}{\def\backgroundlastpage{#1}}%
 
 % Cacher la barre d'entete
 \newboolean{@hideheadline}%
@@ -170,10 +181,19 @@
 	\hspace{.61\textwidth}
 	\begin{beamercolorbox}[sep=.5em,center,rounded=true,wd=.37\textwidth,ignorebg]{author}%
 		\bfseries
-		\usebeamerfont{author}\insertauthor \\[1em]%
+		\usebeamerfont{author}\insertauthor\\[1em]%
 		\usebeamerfont{institute}\insertinstitute \\[1em]%
-		\usebeamerfont{date}\insertdate%
+		\usebeamerfont{date}\insertdate\\[.2em]%
+		ADAGIo team
+	\end{beamercolorbox}\\[.8em]%
+	\hfill%
+	\transparent{.6}%
+	\begin{beamercolorbox}[wd=.15\paperwidth,ht=.11\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{title}
+		\transparent{1}%
+		\includegraphics[height=.08\paperheight]{\logosec}\\[.015\paperheight]
 	\end{beamercolorbox}%
+	\transparent{1}
+	\hfill~%
 }
 
 \setbeamertemplate{headline}%
@@ -320,7 +340,14 @@
 			\setbeamertemplate{background canvas}[default]%
 			\setbeamercolor{background canvas}{parent=palette quaternary}%
 			\begin{frame}[plain]%
+				\vspace{3.85em}
 				\tocsectioncontent%
+				\vspace{3.85em}
+				\hfill%
+				\begin{beamercolorbox}[wd=.09\paperwidth,ht=.09\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
+					\includegraphics[height=.06\paperheight]{\logosec}\\[.035\paperheight]
+				\end{beamercolorbox}%
+				\hfill~%
 			\end{frame}%
 		}%
 	}%
@@ -333,7 +360,7 @@
 		\setbeamercolor{background canvas}{parent=palette quaternary}%
 		\begin{frame}[plain]%
 			\begin{center}%
-				\bfseries \Huge \color{white} #1
+				\bfseries \Huge \color{white} #1%
 			\end{center}%
 		\end{frame}%
 	}%
@@ -345,11 +372,34 @@
 		\setbeamertemplate{background canvas}[default]%
 		\setbeamercolor{background canvas}{parent=palette quaternary}%
 		\begin{frame}[plain]%
+			\vspace{.435\textheight}%
 			\begin{center}%
-				\bfseries \itshape \Large \color{white} #1
+				\bfseries \itshape \Large \color{white} #1%
 			\end{center}%
+			\vspace{.435\textheight}%
+			\hfill%
+			\begin{beamercolorbox}[wd=.09\paperwidth,ht=.09\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
+				\includegraphics[height=.06\paperheight]{\logosec}\\[.035\paperheight]
+			\end{beamercolorbox}%
+			\hfill~%
 		\end{frame}%
 	}%
+}
+
+\newcommand{\lastslide}[1]%
+{%
+	\setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{\backgroundlastpage}}
+	\begin{frame}[plain]%
+		\transparent{0}%
+		\vspace{.75\paperheight}%
+		\hfill%
+		\begin{beamercolorbox}[wd=.35\paperwidth,sep=.5em,center,rounded=false]{title}%
+			\transparent{1}%
+			\bfseries%
+			\usebeamerfont{title}#1%
+			\vspace{-.1em}%
+		\end{beamercolorbox}%
+	\end{frame}%
 }
 
 % -------------------------------------------------------------------------
