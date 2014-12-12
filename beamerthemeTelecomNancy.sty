@@ -175,17 +175,7 @@
 		\bfseries%
 		\usebeamerfont{title}\inserttitle \\[.2em]%
 		\usebeamerfont{subtitle}\insertsubtitle%
-	\end{beamercolorbox}%
-\vspace{6em}%
-	\transparent{1}
-	\hspace{.61\textwidth}
-	\begin{beamercolorbox}[sep=.5em,center,rounded=true,wd=.37\textwidth,ignorebg]{author}%
-		\bfseries
-		\usebeamerfont{author}\insertauthor\\[1em]%
-		\usebeamerfont{institute}\insertinstitute \\[1em]%
-		\usebeamerfont{date}\insertdate\\[.2em]%
-		ADAGIo team
-	\end{beamercolorbox}\\[.8em]%
+	\end{beamercolorbox}~\\[-1.335em]%
 	\hfill%
 	\transparent{.6}%
 	\begin{beamercolorbox}[wd=.15\paperwidth,ht=.11\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{title}
@@ -193,7 +183,16 @@
 		\includegraphics[height=.08\paperheight]{\logosec}\\[.015\paperheight]
 	\end{beamercolorbox}%
 	\transparent{1}
-	\hfill~%
+	\hfill~\\%
+\vspace{4em}%
+	\hspace{.615\textwidth}%
+	\begin{beamercolorbox}[sep=.5em,center,rounded=true,wd=.37\textwidth,ignorebg]{author}%
+		\bfseries%
+		\usebeamerfont{author}\insertauthor\\%
+		\usebeamerfont{institute}\textit{ADAGIo team}\\[1em]%
+		\usebeamerfont{institute}\insertinstitute \\[1em]%
+		\usebeamerfont{date}\insertdate\\[.2em]%
+	\end{beamercolorbox}%
 }
 
 \setbeamertemplate{headline}%
@@ -339,7 +338,7 @@
 		{%
 			\setbeamertemplate{background canvas}[default]%
 			\setbeamercolor{background canvas}{parent=palette quaternary}%
-			\begin{frame}[plain]%
+			\begin{frame}[plain,noframenumbering]%
 				\vspace{3.85em}
 				\tocsectioncontent%
 				\vspace{3.85em}
@@ -358,7 +357,7 @@
 	{%
 		\setbeamertemplate{background canvas}[default]%
 		\setbeamercolor{background canvas}{parent=palette quaternary}%
-		\begin{frame}[plain]%
+		\begin{frame}[plain,noframenumbering]%
 			\begin{center}%
 				\bfseries \Huge \color{white} #1%
 			\end{center}%
@@ -371,12 +370,12 @@
 	{%
 		\setbeamertemplate{background canvas}[default]%
 		\setbeamercolor{background canvas}{parent=palette quaternary}%
-		\begin{frame}[plain]%
-			\vspace{.435\textheight}%
+		\begin{frame}[plain,noframenumbering]%
+			\vspace{.435\textheight}%noframenumbering
 			\begin{center}%
 				\bfseries \itshape \Large \color{white} #1%
 			\end{center}%
-			\vspace{.435\textheight}%
+			\vspace{.437\textheight}%
 			\hfill%
 			\begin{beamercolorbox}[wd=.09\paperwidth,ht=.09\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
 				\includegraphics[height=.06\paperheight]{\logosec}\\[.035\paperheight]
@@ -389,7 +388,7 @@
 \newcommand{\lastslide}[1]%
 {%
 	\setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{\backgroundlastpage}}
-	\begin{frame}[plain]%
+	\begin{frame}[plain,noframenumbering]%
 		\transparent{0}%
 		\vspace{.75\paperheight}%
 		\hfill%
@@ -400,6 +399,7 @@
 			\vspace{-.1em}%
 		\end{beamercolorbox}%
 	\end{frame}%
+	\setbeamertemplate{background canvas}{}
 }
 
 % -------------------------------------------------------------------------
