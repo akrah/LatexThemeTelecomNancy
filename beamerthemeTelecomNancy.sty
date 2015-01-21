@@ -40,24 +40,10 @@
 % -------------------------------------------------------------------------
 % Options
 
-% Affichage du plan sur deux colonnes
-\newboolean{@usetoccolumns}%
-\setboolean{@usetoccolumns}{false}%
-\DeclareOptionBeamer{usetoccolumns}{\setboolean{@usetoccolumns}{true}}%
-
-% Nombre de sections dans la première colonne
-\def\tocnbsections{}
-\DeclareOptionBeamer{tocnbsections}{\def\tocnbsections{#1}}%
-
 % Affichage du plan à chaque section
 \newboolean{@nosectiontoc}%
 \setboolean{@nosectiontoc}{false}%
 \DeclareOptionBeamer{nosectiontoc}{\setboolean{@nosectiontoc}{true}}%
-
-% Ajouter de l'espace entre les sections du sommaire
-\newboolean{@addsecspace}%
-\setboolean{@addsecspace}{false}%
-\DeclareOptionBeamer{addsecspace}{\setboolean{@addsecspace}{true}}%
 
 % Ajouter de l'espace entre les sections du sommaire
 \newboolean{@onlysecinheadline}%
@@ -71,13 +57,6 @@
 % Taille du logo
 \def\logoheight{}%
 \DeclareOptionBeamer{logoheight}{\def\logoheight{#1}}%
-
-\def\logosec{}%
-\DeclareOptionBeamer{logosec}{\def\logosec{#1}}%
-
-% Taille du logosec
-\def\logosecheight{}%
-\DeclareOptionBeamer{logosecheight}{\def\logosecheight{#1}}%
 
 % Fond 1ere page
 \def\backgroundtitlepage{}%
@@ -136,8 +115,7 @@
 \setbeamercolor{palette tertiary}{fg=\secondcolor,bg=}%
 \setbeamercolor{palette quaternary}{fg=white,bg=\secondcolor}%
 
-\setbeamercolor{title}{fg=white,bg=black}%
-\setbeamercolor{author}{parent=palette secondary}%
+\setbeamercolor{title}{parent=palette secondary}%
 
 \setbeamercolor{section in head/foot}{parent=palette secondary}%
 \setbeamercolor{author in head/foot}{parent=palette primary}%
@@ -166,34 +144,7 @@
 % Template des slides
 
 \setbeamertemplate{navigation symbols}{}%
-\setbeamertemplate{title page}%
-{%
-\vspace{3.5em}%
-	\transparent{.6}%
-	\begin{beamercolorbox}[sep=.7em,dp=0em,colsep=0em,colsep*=0em,center,rounded=false]{title}%
-		\transparent{1}%
-		\bfseries%
-		\usebeamerfont{title}\inserttitle \\[.2em]%
-		\usebeamerfont{subtitle}\insertsubtitle%
-	\end{beamercolorbox}~\\[-1.335em]%
-	\hfill%
-	\transparent{.6}%
-	\begin{beamercolorbox}[wd=.15\paperwidth,ht=.11\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{title}
-		\transparent{1}%
-		\includegraphics[height=.08\paperheight]{\logosec}\\[.015\paperheight]
-	\end{beamercolorbox}%
-	\transparent{1}
-	\hfill~\\%
-\vspace{5.5em}%
-	\hspace{.615\textwidth}%
-	\begin{beamercolorbox}[sep=.5em,center,rounded=true,wd=.37\textwidth,ignorebg]{author}%
-		\bfseries%
-		\usebeamerfont{author}\insertauthor\\%
-		\usebeamerfont{institute}\textit{ADAGIo team}\\[1em]%
-		\usebeamerfont{institute}\insertinstitute \\[1em]%
-		\usebeamerfont{date}\insertdate\\[.2em]%
-	\end{beamercolorbox}%
-}
+\setbeamertemplate{title page}[default][sep=0.5em,rounded=true,shadow=true]%
 
 \setbeamertemplate{headline}%
 {%
@@ -227,7 +178,7 @@
 	{%
 		\hspace{2\slidemargin}%
 		\begin{beamercolorbox}[wd=0.9\slidewidth,ht=1.1em,dp=0.4em,center]{author in head/foot}%
-			\textit{\insertshorttitle} % \quad -- \quad \textit{\insertshortauthor}%
+			\textit{\insertshorttitle} \quad -- \quad \textit{\insertshortauthor}%
 		\end{beamercolorbox}%
 		\vbox{%
 			\begin{beamercolorbox}[wd=.05\textwidth,ht=1em,colsep=0em,center,rounded=true,shadow=true]{date in head/foot}%
@@ -273,25 +224,20 @@
 \setbeamerfont{section in toc shaded}{series=\mdseries,size=\Large}
 \setbeamerfont{subsection in toc}{series=\bfseries,size=\normalfont}
 \setbeamerfont{subsection in toc shaded}{series=\mdseries}
-\ifthenelse{\boolean{@addsecspace}}
-{%
-	\setbeamertemplate{section in toc}{\vskip1em{{\inserttocsectionnumber.} \inserttocsection}}%
-}{%
-	\setbeamertemplate{section in toc}{%
-		\begin{beamercolorbox}[wd=\slidewidth,ht=1.1em,dp=0.4em,center]{palette quaternary}%
-			\inserttocsection%
-		\end{beamercolorbox}%
-	}%
-	\setbeamertemplate{section in toc shaded}{%
-		\begin{beamercolorbox}[wd=\slidewidth,ht=1em,dp=0.4em,center]{palette quaternary}%
-			\inserttocsection%
-		\end{beamercolorbox}%
-	}%
-	\setbeamertemplate{subsection in toc}{%
-		\begin{beamercolorbox}[wd=\slidewidth,ht=1em,dp=0em,center]{palette quaternary}%
-			\inserttocsubsection%
-		\end{beamercolorbox}%
-	}%
+\setbeamertemplate{section in toc}{%
+	\begin{beamercolorbox}[wd=\slidewidth,ht=1em,dp=0.4em,center]{palette quaternary}%
+		\inserttocsection%
+	\end{beamercolorbox}%
+}%
+\setbeamertemplate{section in toc shaded}{%
+	\begin{beamercolorbox}[wd=\slidewidth,ht=1em,dp=0.4em,center]{palette quaternary}%
+		\inserttocsection%
+	\end{beamercolorbox}%
+}%
+\setbeamertemplate{subsection in toc}{%
+	\begin{beamercolorbox}[wd=\slidewidth,ht=1em,dp=0em,center]{palette quaternary}%
+		\inserttocsubsection%
+	\end{beamercolorbox}%
 }%
 
 \newcommand{\frametitleintoc}
@@ -304,32 +250,22 @@
 	}%
 }
 
-\ifthenelse{\boolean{@usetoccolumns}}
-{%
-	% Counter
-	\newcounter{tocsecondcolumnstart}%
-	\setcounter{tocsecondcolumnstart}{\tocnbsections}%
-	\addtocounter{tocsecondcolumnstart}{1}%
-	% Command
-	\newcommand{\toccontent}[1]{%
-		\frametitleintoc%
-		\begin{columns}[t]%
-			\begin{column}{0.4\textwidth}%
-				\tableofcontents[sections={1-\tocnbsections},#1]%
-			\end{column}%
-			\begin{column}{0.4\textwidth}%
-				\tableofcontents[sections={\thetocsecondcolumnstart-},#1]%
-			\end{column}%
-		\end{columns}%
-	}%
-}{%
-	\newcommand{\toccontent}[1]{%
-		\tableofcontents[#1,hideallsubsections]%
-	}%
-}%
-
-\newcommand{\tocfullcontent}{\toccontent{}}
+\newcommand{\toccontent}[1]{\tableofcontents[#1,hideallsubsections]}%
+\newcommand{\tocfullcontent}{\toccontent{sectionstyle=shaded/shaded}}
 \newcommand{\tocsectioncontent}{\toccontent{currentsection}}
+
+\newcommand{\tocslide}
+{%
+	{%
+		\setbeamertemplate{background canvas}[default]%
+		\setbeamercolor{background canvas}{parent=palette quaternary}%
+		\begin{frame}[plain,noframenumbering]%
+			\vfill%
+			\tocfullcontent%
+			\vfill%
+		\end{frame}%
+	}%
+}
 
 \ifthenelse{\boolean{@nosectiontoc}}{}%
 {%
@@ -339,14 +275,9 @@
 			\setbeamertemplate{background canvas}[default]%
 			\setbeamercolor{background canvas}{parent=palette quaternary}%
 			\begin{frame}[plain,noframenumbering]%
-				\vspace{3.85em}
+				\vfill%
 				\tocsectioncontent%
-				\vspace{3.85em}
-				\hfill%
-				\begin{beamercolorbox}[wd=.09\paperwidth,ht=.09\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
-					\includegraphics[height=.06\paperheight]{\logosec}\\[.035\paperheight]
-				\end{beamercolorbox}%
-				\hfill~%
+				\vfill%
 			\end{frame}%
 		}%
 	}%
@@ -358,9 +289,9 @@
 		\setbeamertemplate{background canvas}[default]%
 		\setbeamercolor{background canvas}{parent=palette quaternary}%
 		\begin{frame}[plain,noframenumbering]%
-			\begin{center}%
-				\bfseries \Huge \color{white} #1%
-			\end{center}%
+			\vfill%
+			\toccontent[sectionstyle=show/hide]%
+			\vfill%
 		\end{frame}%
 	}%
 }
@@ -371,16 +302,9 @@
 		\setbeamertemplate{background canvas}[default]%
 		\setbeamercolor{background canvas}{parent=palette quaternary}%
 		\begin{frame}[plain,noframenumbering]%
-			\vspace{.435\textheight}%noframenumbering
-			\begin{center}%
-				\bfseries \itshape \Large \color{white} #1%
-			\end{center}%
-			\vspace{.437\textheight}%
-			\hfill%
-			\begin{beamercolorbox}[wd=.09\paperwidth,ht=.09\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
-				\includegraphics[height=.06\paperheight]{\logosec}\\[.035\paperheight]
-			\end{beamercolorbox}%
-			\hfill~%
+			\vfill%
+			\tableofcontents[sectionstyle=show/hide/hide]%
+			\vfill%
 		\end{frame}%
 	}%
 }
@@ -389,14 +313,10 @@
 {%
 	\setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{\backgroundlastpage}}
 	\begin{frame}[plain,noframenumbering]%
-		\transparent{0}%
-		\vspace{.75\paperheight}%
-		\hfill%
+		\vfill%
 		\begin{beamercolorbox}[wd=.35\paperwidth,sep=.5em,center,rounded=false]{title}%
-			\transparent{1}%
 			\bfseries%
 			\usebeamerfont{title}#1%
-			\vspace{-.1em}%
 		\end{beamercolorbox}%
 	\end{frame}%
 	\setbeamertemplate{background canvas}{}
