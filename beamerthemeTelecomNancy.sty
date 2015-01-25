@@ -283,27 +283,42 @@
 	}%
 }%
 
-\newcommand{\sectionslide}[1]%
+\newcommand{\sectionslide}%
 {%
 	{%
 		\setbeamertemplate{background canvas}[default]%
 		\setbeamercolor{background canvas}{parent=palette quaternary}%
 		\begin{frame}[plain,noframenumbering]%
 			\vfill%
-			\toccontent[sectionstyle=show/hide]%
+			\tableofcontents[sectionstyle=show/hide]%
 			\vfill%
 		\end{frame}%
 	}%
 }
 
-\newcommand{\subsectionslide}[1]%
+\newcommand{\subsectionslide}%
 {%
 	{%
 		\setbeamertemplate{background canvas}[default]%
 		\setbeamercolor{background canvas}{parent=palette quaternary}%
 		\begin{frame}[plain,noframenumbering]%
 			\vfill%
-			\tableofcontents[sectionstyle=show/hide/hide]%
+			\tableofcontents[currentsubsection,
+				sectionstyle=hide/hide,
+				subsectionstyle=shaded/hide/hide]%
+			\vfill%
+		\end{frame}%
+	}%
+}
+
+\newcommand{\subsectionslidecustom}[1]%
+{%
+	{%
+		\setbeamertemplate{background canvas}[default]%
+		\setbeamercolor{background canvas}{parent=palette quaternary}%
+		\begin{frame}[plain,noframenumbering]%
+			\vfill%
+			\color{white} \bfseries \begin{center}#1\end{center}
 			\vfill%
 		\end{frame}%
 	}%
