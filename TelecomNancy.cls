@@ -253,6 +253,27 @@
 	\end{table}%
 }
 
+\newcommand{\nextTopic}[2][]{%
+	\def\@extitle{#1}%
+	\def\@instr{#2}%
+	\vspace{1em}
+	\begin{table}[!ht]%
+		\arrayrulecolor{\secondcolor}%
+		\setlength{\arrayrulewidth}{1.5mm}%
+		\noindent\begin{tabular}{|l}%
+			\begin{minipage}[l]{.96\columnwidth}%
+				\ifx\@extitle\@empty\else\textbf{\large #1}\fi%
+				\ifx\@instr\@empty%
+				\else%
+					\\
+					\vspace{-.7em}\\
+					#2
+				\fi%
+			\end{minipage}%
+		\end{tabular}%
+	\end{table}%
+}
+
 \newcommand{\nextInstructions}[1]{%
 	\def\@instr{#1}%
 	\begin{table}[!ht]%
