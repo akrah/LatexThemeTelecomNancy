@@ -136,11 +136,13 @@
 \setbeamercolor{palette tertiary}{fg=\secondcolor,bg=}%
 \setbeamercolor{palette quaternary}{fg=white,bg=\secondcolor}%
 
-\setbeamercolor{title}{fg=white,bg=black}%
-\setbeamercolor{author}{parent=palette secondary}%
+\setbeamercolor{title}{parent=palette secondary}%
+\setbeamercolor{logoTitle}{parent=palette primary}%
+\setbeamercolor{author}{parent=palette tertiary}%
+\setbeamercolor{logointoc}{fg=,bg=white}%
 
 \setbeamercolor{section in head/foot}{parent=palette secondary}%
-\setbeamercolor{author in head/foot}{parent=palette primary}%
+\setbeamercolor{author in head/foot}{parent=palette tertiary}%
 \setbeamercolor{date in head/foot}{parent=palette secondary}%
 
 \setbeamercolor{frametitle in toc}{parent=palette quaternary}%
@@ -168,31 +170,26 @@
 \setbeamertemplate{navigation symbols}{}%
 \setbeamertemplate{title page}%
 {%
-\vspace{3.5em}%
-	\transparent{.6}%
-	\begin{beamercolorbox}[sep=.7em,dp=0em,colsep=0em,colsep*=0em,center,rounded=false]{title}%
-		\transparent{1}%
+	\hfill%
+	\begin{beamercolorbox}[wd=.2\paperwidth,ht=.15\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{logoTitle}
+		\includegraphics[height=.15\paperheight]{\logosec}
+	\end{beamercolorbox}\\%
+\vspace{2.5em}%
+	\begin{beamercolorbox}[sep=.7em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true,shadow=true]{title}%
 		\bfseries%
 		\usebeamerfont{title}\inserttitle \\[.2em]%
 		\usebeamerfont{subtitle}\insertsubtitle%
 	\end{beamercolorbox}~\\[-1.335em]%
+\vspace{2.5em}%
 	\hfill%
-	\transparent{.6}%
-	\begin{beamercolorbox}[wd=.15\paperwidth,ht=.11\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{title}
-		\transparent{1}%
-		\includegraphics[height=.08\paperheight]{\logosec}\\[.015\paperheight]
-	\end{beamercolorbox}%
-	\transparent{1}
-	\hfill~\\%
-\vspace{5.5em}%
-	\hspace{.615\textwidth}%
 	\begin{beamercolorbox}[sep=.5em,center,rounded=true,wd=.37\textwidth,ignorebg]{author}%
 		\bfseries%
 		\usebeamerfont{author}\insertauthor\\%
-		\usebeamerfont{institute}\textit{ADAGIo team}\\[1em]%
 		\usebeamerfont{institute}\insertinstitute \\[1em]%
 		\usebeamerfont{date}\insertdate\\[.2em]%
 	\end{beamercolorbox}%
+	\hfill~\\
+\vspace{2em}
 }
 
 \setbeamertemplate{headline}%
@@ -261,7 +258,7 @@
 % -------------------------------------------------------------------------
 % Emph
 
-\renewcommand{\emph}[1]{\textbf{\color{\secondcolor}{#1}}}%
+\renewcommand{\emph}[1]{\textbf{\color{\firstcolor}{#1}}}%
 % -------------------------------------------------------------------------
 
 
@@ -339,12 +336,12 @@
 			\setbeamertemplate{background canvas}[default]%
 			\setbeamercolor{background canvas}{parent=palette quaternary}%
 			\begin{frame}[plain,noframenumbering]%
-				\vspace{3.85em}
+				\vspace{3.4em}
 				\tocsectioncontent%
-				\vspace{3.85em}
+				\vspace{3.4em}
 				\hfill%
-				\begin{beamercolorbox}[wd=.09\paperwidth,ht=.09\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
-					\includegraphics[height=.06\paperheight]{\logosec}\\[.035\paperheight]
+				\begin{beamercolorbox}[wd=.12\paperwidth,ht=.145\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{logointoc}
+					\includegraphics[height=.1\paperheight]{\logosec}\\[.05\paperheight]
 				\end{beamercolorbox}%
 				\hfill~%
 			\end{frame}%
@@ -371,14 +368,14 @@
 		\setbeamertemplate{background canvas}[default]%
 		\setbeamercolor{background canvas}{parent=palette quaternary}%
 		\begin{frame}[plain,noframenumbering]%
-			\vspace{.435\textheight}%noframenumbering
+			\vspace{.435\textheight}%n
 			\begin{center}%
 				\bfseries \itshape \Large \color{white} #1%
 			\end{center}%
 			\vspace{.437\textheight}%
 			\hfill%
-			\begin{beamercolorbox}[wd=.09\paperwidth,ht=.09\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
-				\includegraphics[height=.06\paperheight]{\logosec}\\[.035\paperheight]
+			\begin{beamercolorbox}[wd=.12\paperwidth,ht=.145\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
+				\includegraphics[height=.1\paperheight]{\logosec}\\[.05\paperheight]
 			\end{beamercolorbox}%
 			\hfill~%
 		\end{frame}%
@@ -387,13 +384,15 @@
 
 \newcommand{\lastslide}[1]%
 {%
-	\setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{\backgroundlastpage}}
+	\ifx\backgroundlastpage\@empty%
+		\setbeamertemplate{background canvas}{}%
+	\else%
+		\setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{\backgroundlastpage}}%
+	\fi%
 	\begin{frame}[plain,noframenumbering]%
-		\transparent{0}%
 		\vspace{.75\paperheight}%
 		\hfill%
 		\begin{beamercolorbox}[wd=.35\paperwidth,sep=.5em,center,rounded=false]{title}%
-			\transparent{1}%
 			\bfseries%
 			\usebeamerfont{title}#1%
 			\vspace{-.1em}%
