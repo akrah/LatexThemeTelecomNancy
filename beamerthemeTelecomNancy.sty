@@ -64,20 +64,31 @@
 \setboolean{@onlysecinheadline}{false}%
 \DeclareOptionBeamer{onlysecinheadline}{\setboolean{@onlysecinheadline}{true}}%
 
-% Image du logo
+% Affichage du logo sur toutes les slides
+\newboolean{@nologoincontent}%
+\setboolean{@nologoincontent}{false}%
+\DeclareOptionBeamer{nologoincontent}{\setboolean{@nologoincontent}{true}}%
+
+% Image des logos
 \def\logo{}%
-\DeclareOptionBeamer{logo}{\def\logo{#1}}%
+\def\logotoc{}%
+\def\logocontent{}%
+\DeclareOptionBeamer{logotoc}{\def\logotoc{#1}}%
+\DeclareOptionBeamer{logocontent}{\def\logocontent{#1}}%
+\DeclareOptionBeamer{logo}{\def\logo{#1}\ifx\logotoc\@empty\def\logotoc{#1}\fi\ifx\logocontent\@empty\def\logocontent{#1}\fi}%
 
-% Taille du logo
-\def\logoheight{}%
-\DeclareOptionBeamer{logoheight}{\def\logoheight{#1}}%
+% Taille du logo sur la première page
+\def\logotitleheight{.15\paperheight}%
+\DeclareOptionBeamer{logotitleheight}{\def\logotitleheight{#1}}%
 
-\def\logosec{}%
-\DeclareOptionBeamer{logosec}{\def\logosec{#1}}%
+% Taille du logo sur les sommaires
+\def\logotocheight{.1\paperheight}%
+\DeclareOptionBeamer{logotocheight}{\def\logotocheight{#1}}%
 
-% Taille du logosec
-\def\logosecheight{}%
-\DeclareOptionBeamer{logosecheight}{\def\logosecheight{#1}}%
+% Taille du logo sur les slides de contenu
+\def\logocontentheight{.06\paperheight}%
+\DeclareOptionBeamer{logocontentheight}{\def\logocontentheight{#1}}%
+
 
 % Fond 1ere page
 \def\backgroundtitlepage{}%
@@ -100,7 +111,12 @@
 \def\secondcolor{red}%
 \DeclareOptionBeamer{secondcolor}{\def\secondcolor{#1}}%
 
+% Couleur secondaire
+\def\thirdcolor{}%
+\DeclareOptionBeamer{thirdcolor}{\def\thirdcolor{#1}}%
+
 \ProcessOptionsBeamer%
+
 
 % -------------------------------------------------------------------------
 
@@ -171,25 +187,26 @@
 \setbeamertemplate{title page}%
 {%
 	\hfill%
-	\begin{beamercolorbox}[wd=.2\paperwidth,ht=.15\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{logoTitle}
-		\includegraphics[height=.15\paperheight]{\logosec}
-	\end{beamercolorbox}\\%
-\vspace{2.5em}%
-	\begin{beamercolorbox}[sep=.7em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true,shadow=true]{title}%
-		\bfseries%
-		\usebeamerfont{title}\inserttitle \\[.2em]%
-		\usebeamerfont{subtitle}\insertsubtitle%
-	\end{beamercolorbox}~\\[-1.335em]%
-\vspace{2.5em}%
+	\newlength{\logotitlewidth}\setlength{\logotitlewidth}{\logotitleheight}\addtolength{\logotitlewidth}{.05\paperheight}%
+	\begin{beamercolorbox}[wd=\logotitlewidth,ht=\logotitleheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{logoTitle}%
+		\includegraphics[height=\logotitleheight]{\logo}%
+	\end{beamercolorbox}\hspace{.1\textwidth}~\\[1em]
 	\hfill%
-	\begin{beamercolorbox}[sep=.5em,center,rounded=true,wd=.37\textwidth,ignorebg]{author}%
+	\begin{beamercolorbox}[wd=.9\textwidth,sep=.7em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true,shadow=true]{title}%
+		\bfseries%
+		\usebeamerfont{title}\inserttitle \\[.5em]
+		\usebeamerfont{subtitle}\textit{\insertsubtitle}%
+	\end{beamercolorbox}
+	\hfill~\\[2.5em]
+	\hfill%
+	\begin{beamercolorbox}[sep=.5em,center,rounded=true,wd=\textwidth,ignorebg]{author}%
 		\bfseries%
 		\usebeamerfont{author}\insertauthor\\%
 		\usebeamerfont{institute}\insertinstitute \\[1em]%
 		\usebeamerfont{date}\insertdate\\[.2em]%
 	\end{beamercolorbox}%
 	\hfill~\\
-\vspace{2em}
+\vspace{3em}
 }
 
 \setbeamertemplate{headline}%
@@ -258,7 +275,11 @@
 % -------------------------------------------------------------------------
 % Emph
 
-\renewcommand{\emph}[1]{\textbf{\color{\firstcolor}{#1}}}%
+\ifx\thirdcolor\@empty%
+	\renewcommand{\emph}[1]{\textbf{\color{\firstcolor}{#1}}}%
+\else%
+	\renewcommand{\emph}[1]{\textbf{\color{\thirdcolor}{#1}}}%
+\fi%
 % -------------------------------------------------------------------------
 
 
@@ -328,6 +349,9 @@
 \newcommand{\tocfullcontent}{\toccontent{}}
 \newcommand{\tocsectioncontent}{\toccontent{currentsection}}
 
+\newlength{\logotocwidth}\setlength{\logotocwidth}{\logotocheight}\addtolength{\logotocwidth}{2em}
+\newlength{\logotocfullheight}\setlength{\logotocfullheight}{\logotocheight}\addtolength{\logotocfullheight}{.03\paperheight}
+
 \ifthenelse{\boolean{@nosectiontoc}}{}%
 {%
 	\AtBeginSection[]
@@ -336,14 +360,14 @@
 			\setbeamertemplate{background canvas}[default]%
 			\setbeamercolor{background canvas}{parent=palette quaternary}%
 			\begin{frame}[plain,noframenumbering]%
-				\vspace{3.4em}
+				\vfill
 				\tocsectioncontent%
-				\vspace{3.4em}
+				\vfill
 				\hfill%
-				\begin{beamercolorbox}[wd=.12\paperwidth,ht=.145\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{logointoc}
-					\includegraphics[height=.1\paperheight]{\logosec}\\[.05\paperheight]
+				\begin{beamercolorbox}[wd=\logotocwidth,ht=\logotocfullheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{logointoc}
+					\includegraphics[height=\logotocheight]{\logotoc}\\[.03\paperheight]
 				\end{beamercolorbox}%
-				\hfill~%
+				\hfill~\\[-.12\paperheight]
 			\end{frame}%
 		}%
 	}%
@@ -368,16 +392,16 @@
 		\setbeamertemplate{background canvas}[default]%
 		\setbeamercolor{background canvas}{parent=palette quaternary}%
 		\begin{frame}[plain,noframenumbering]%
-			\vspace{.435\textheight}%n
+			\vfill
 			\begin{center}%
 				\bfseries \itshape \Large \color{white} #1%
 			\end{center}%
-			\vspace{.437\textheight}%
+			\vfill
 			\hfill%
-			\begin{beamercolorbox}[wd=.12\paperwidth,ht=.145\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
-				\includegraphics[height=.1\paperheight]{\logosec}\\[.05\paperheight]
+			\begin{beamercolorbox}[wd=\logotocwidth,ht=\logotocfullheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
+				\includegraphics[height=\logotocheight]{\logotoc}\\[.03\paperheight]
 			\end{beamercolorbox}%
-			\hfill~%
+			\hfill~\\[-.13\paperheight]
 		\end{frame}%
 	}%
 }
@@ -415,14 +439,8 @@
 			\includegraphics[width=\paperwidth,height=\paperheight]{\backgroundtitlepage}%
 		\fi%
 	\else%
-		\ifx\logo\@empty%
-		\else%
-			\ifx\logoheight\@empty%
-				\begin{picture}(0,0)\put(5,-270){\includegraphics[height=0.06\paperheight]{\logo}}\end{picture}
-			\else%
-				\begin{picture}(0,0)\put(5,-270){\includegraphics[height=\logoheight]{\logo}}\end{picture}
-			\fi%
-		\fi%
+		\ifthenelse{\boolean{@nologoincontent}}{}%
+			{\begin{picture}(0,0)\put(5,-270){\includegraphics[height=\logocontentheight]{\logocontent}}\end{picture}}%
 	\fi%
 }
 % -------------------------------------------------------------------------
