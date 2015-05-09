@@ -414,13 +414,19 @@
 		\setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{\backgroundlastpage}}%
 	\fi%
 	\begin{frame}[plain,noframenumbering]%
-		\vspace{.75\paperheight}%
 		\hfill%
-		\begin{beamercolorbox}[wd=.35\paperwidth,sep=.5em,center,rounded=false]{title}%
+		\setlength{\logotitlewidth}{\logotitleheight}\addtolength{\logotitlewidth}{.05\paperheight}%
+		\begin{beamercolorbox}[wd=\logotitlewidth,ht=\logotitleheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{logoTitle}%
+			\includegraphics[height=\logotitleheight]{\logo}%
+		\end{beamercolorbox}\hspace{.1\textwidth}~\\
+		\vspace{5.5em}
+		\hfill%
+		\begin{beamercolorbox}[wd=.6\paperwidth,sep=.5em,center,rounded=false]{palette first}%
 			\bfseries%
 			\usebeamerfont{title}#1%
-			\vspace{-.1em}%
 		\end{beamercolorbox}%
+		\hfill~\\
+		\vspace{10em}
 	\end{frame}%
 	\setbeamertemplate{background canvas}{}
 }
