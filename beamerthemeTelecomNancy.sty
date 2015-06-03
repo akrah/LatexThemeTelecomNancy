@@ -72,12 +72,17 @@
 \def\logoheight{}%
 \DeclareOptionBeamer{logoheight}{\def\logoheight{#1}}%
 
+% Image du logosec
 \def\logosec{}%
 \DeclareOptionBeamer{logosec}{\def\logosec{#1}}%
 
 % Taille du logosec
 \def\logosecheight{}%
 \DeclareOptionBeamer{logosecheight}{\def\logosecheight{#1}}%
+
+% Image du logosecsecond
+\def\logosecsecond{}%
+\DeclareOptionBeamer{logosecsecond}{\def\logosecsecond{#1}}%
 
 % Fond 1ere page
 \def\backgroundtitlepage{}%
@@ -170,7 +175,7 @@
 {%
 \vspace{3.5em}%
 	\transparent{.6}%
-	\begin{beamercolorbox}[sep=.7em,dp=0em,colsep=0em,colsep*=0em,center,rounded=false]{title}%
+	\begin{beamercolorbox}[sep=.9em,dp=0em,colsep=0em,colsep*=0em,center,rounded=false]{title}%
 		\transparent{1}%
 		\bfseries%
 		\usebeamerfont{title}\inserttitle \\[.2em]%
@@ -178,18 +183,19 @@
 	\end{beamercolorbox}~\\[-1.335em]%
 	\hfill%
 	\transparent{.6}%
-	\begin{beamercolorbox}[wd=.15\paperwidth,ht=.11\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{title}
+	\begin{beamercolorbox}[wd=.15\paperwidth,ht=.18\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{title}
 		\transparent{1}%
 		\includegraphics[height=.08\paperheight]{\logosec}\\[.015\paperheight]
+		\includegraphics[height=.06\paperheight]{\logosecsecond}\\[.015\paperheight]
 	\end{beamercolorbox}%
 	\transparent{1}
 	\hfill~\\%
-\vspace{5.5em}%
+\vspace{4.5em}%
 	\hspace{.615\textwidth}%
 	\begin{beamercolorbox}[sep=.5em,center,rounded=true,wd=.37\textwidth,ignorebg]{author}%
 		\bfseries%
 		\usebeamerfont{author}\insertauthor\\%
-		\usebeamerfont{institute}\textit{ADAGIo team}\\[1em]%
+		\usebeamerfont{institute}\textit{Equipe ADAGIo}\\[1em]%
 		\usebeamerfont{institute}\insertinstitute \\[1em]%
 		\usebeamerfont{date}\insertdate\\[.2em]%
 	\end{beamercolorbox}%
