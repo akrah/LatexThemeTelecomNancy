@@ -173,7 +173,7 @@
 \setbeamertemplate{navigation symbols}{}%
 \setbeamertemplate{title page}%
 {%
-\vspace{3.5em}%
+\vspace{2.5em}%
 	\transparent{.6}%
 	\begin{beamercolorbox}[sep=.9em,dp=0em,colsep=0em,colsep*=0em,center,rounded=false]{title}%
 		\transparent{1}%
@@ -183,21 +183,25 @@
 	\end{beamercolorbox}~\\[-1.335em]%
 	\hfill%
 	\transparent{.6}%
-	\begin{beamercolorbox}[wd=.15\paperwidth,ht=.18\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{title}
+	\begin{beamercolorbox}[wd=.3\paperwidth,ht=.1\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center]{title}
 		\transparent{1}%
-		\includegraphics[height=.08\paperheight]{\logosec}\\[.015\paperheight]
+		\includegraphics[height=.08\paperheight]{\logosec} 
 		\includegraphics[height=.06\paperheight]{\logosecsecond}\\[.015\paperheight]
 	\end{beamercolorbox}%
 	\transparent{1}
 	\hfill~\\%
 \vspace{4.5em}%
-	\hspace{.615\textwidth}%
-	\begin{beamercolorbox}[sep=.5em,center,rounded=true,wd=.37\textwidth,ignorebg]{author}%
+	%\hspace{.615\textwidth}%
+	\begin{beamercolorbox}[sep=.5em,left,rounded=true,wd=\textwidth,ignorebg]{author}%
 		\bfseries%
-		\usebeamerfont{author}\insertauthor\\%
-		\usebeamerfont{institute}\textit{Equipe ADAGIo}\\[1em]%
-		\usebeamerfont{institute}\insertinstitute \\[1em]%
-		\usebeamerfont{date}\insertdate\\[.2em]%
+		\usebeamerfont{author}{\small\insertauthor}\\[.5em]%
+		\usebeamerfont{institute}\textit{$^1$ LORIA, Universite de Lorraine, Nancy\\ $^2$ INRA, LERFoB, Champenoux}%
+	\end{beamercolorbox}
+	\hfill
+	\begin{beamercolorbox}[sep=0em,center,rounded=true,wd=.31\textwidth,ignorebg]{author}%
+		\bfseries%
+		\usebeamerfont{institute}\insertinstitute \\[.5em]%
+		\usebeamerfont{date}\insertdate%
 	\end{beamercolorbox}%
 }
 
@@ -349,8 +353,8 @@
 				\tocsectioncontent%
 				\vspace{3.85em}
 				\hfill%
-				\begin{beamercolorbox}[wd=.09\paperwidth,ht=.09\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
-					\includegraphics[height=.06\paperheight]{\logosec}\\[.035\paperheight]
+				\begin{beamercolorbox}[wd=.21\paperwidth,ht=.09\paperheight,sep=0em,dp=0em,colsep=0em,colsep*=0em,center,rounded=true]{palette secondary}
+					\includegraphics[height=.06\paperheight]{\logosec} \includegraphics[height=.055\paperheight]{\logosecsecond}\\[.035\paperheight]
 				\end{beamercolorbox}%
 				\hfill~%
 			\end{frame}%
