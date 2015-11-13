@@ -8,8 +8,8 @@ Personnal beamer and exercise theme used at Telecom Nancy.
 ## How to include the Beamer theme of Telecom Nancy in my project ?
 
 Two solutions :
-  1. copy the *beamerthemeTelecomNancy.sty* file in your latex project folder
-  2. copy the *beamerthemeTelecomNancy.sty* on your latex packages folder (~/.texmf-var/tex/latex/)
+  1. copy *beamerthemeTelecomNancy.sty* in your latex **project** folder
+  2. copy *beamerthemeTelecomNancy.sty* in the latex **packages** folder of your hoem ($HOME/.texmf-var/tex/latex/)
 
 ## How to use the Beamer theme of Telecom Nancy in my latex files ?
 
