@@ -163,7 +163,3 @@ Option			| Default value | Description
 **secondcolor**	|	red			| Secondary color.
 **logo**		|				| Logo in bottom left of page.
 **footband**	|				| Foot band image in right of the logo.
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/akrah/latexthemetelecomnancy/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
